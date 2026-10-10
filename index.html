@@ -1,114 +1,637 @@
-
 <!DOCTYPE html>
 <html lang="pa">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Joban Era | ਪੰਜਾਬੀ ਕਵਿਤਾਵਾਂ</title>
-<style>
-body {
-  margin: 0;
-  font-family: Georgia, serif;
-  background: #f8f3ea;
-  color: #29251f;
-}
-header {
-  background: #29251f;
-  color: white;
-  text-align: center;
-  padding: 32px 16px;
-}
-header h1 {
-  font-size: 42px;
-  margin: 8px;
-  color: #e9c99a;
-}
-nav {
-  text-align: center;
-  padding: 16px 5px;
-  background: #e9dfd0;
-}
-nav a {
-  color: #44372b;
-  margin: 8px;
-  text-decoration: none;
-}
-main {
-  max-width: 760px;
-  margin: auto;
-  padding: 24px 18px;
-}
-article {
-  background: white;
-  padding: 22px;
-  margin: 18px 0;
-  border-radius: 12px;
-  line-height: 1.9;
-}
-h2 { color: #895b3c; }
-footer {
-  background: #29251f;
-  color: white;
-  padding: 24px;
-  text-align: center;
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f8f5ef">
+  <meta name="description" content="Joban Era — Punjabi poetry, shayari and writings by Jobanpreet Singh Bhullar.">
+  <title>Joban Era | ਜੋਬਨ ਦੀ ਕਲਮ</title>
+
+  <style>
+    :root {
+      --bg: #f8f5ef;
+      --paper: #fffdf9;
+      --text: #26251f;
+      --muted: #77746c;
+      --accent: #98764b;
+      --line: #e7e0d5;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Georgia, "Noto Serif Gurmukhi", "Nirmala UI", serif;
+      line-height: 1.8;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    button, input { font: inherit; }
+
+    .container {
+      width: min(1080px, 90%);
+      margin: auto;
+    }
+
+    header {
+      border-bottom: 1px solid var(--line);
+      background: var(--bg);
+    }
+
+    .navbar {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      font-size: 25px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .brand span { color: var(--accent); }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    nav a:hover { color: var(--accent); }
+
+    .lang-btn, .filter-btn {
+      background: transparent;
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      padding: 8px 15px;
+      cursor: pointer;
+      color: var(--text);
+    }
+
+    .hero {
+      text-align: center;
+      padding: 90px 0 76px;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(43px, 8vw, 78px);
+      line-height: 1.25;
+      margin: 18px 0;
+      font-weight: 500;
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 570px;
+      margin: 0 auto 28px;
+      font-size: 17px;
+    }
+
+    .main-btn {
+      display: inline-block;
+      background: var(--text);
+      color: white;
+      padding: 12px 25px;
+      border-radius: 3px;
+      transition: 0.2s;
+    }
+
+    .main-btn:hover { background: var(--accent); }
+
+    .divider {
+      height: 1px;
+      background: var(--line);
+    }
+
+    section { padding: 65px 0; }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .section-heading h2 {
+      font-size: 35px;
+      margin: 0 0 8px;
+      font-weight: 500;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .quote {
+      background: #eee6d9;
+      text-align: center;
+      padding: 42px 24px;
+      border-radius: 5px;
+    }
+
+    .quote .mark {
+      font-size: 45px;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .quote p {
+      font-size: clamp(21px, 4vw, 30px);
+      max-width: 700px;
+      margin: 14px auto;
+    }
+
+    .quote small { color: var(--muted); }
+
+    .filters {
+      display: flex;
+      justify-content: center;
+      gap: 9px;
+      flex-wrap: wrap;
+      margin: 28px 0;
+    }
+
+    .filter-btn.active {
+      background: var(--text);
+      color: white;
+      border-color: var(--text);
+    }
+
+    .writing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .writing-card {
+      background: var(--paper);
+      padding: 25px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      display: flex;
+      flex-direction: column;
+      min-height: 245px;
+    }
+
+    .writing-card .category {
+      color: var(--accent);
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+
+    .writing-card h3 {
+      font-size: 23px;
+      font-weight: 500;
+      margin: 12px 0;
+    }
+
+    .writing-card p {
+      color: var(--muted);
+      font-size: 15px;
+      margin: 0 0 20px;
+    }
+
+    .read-btn {
+      margin-top: auto;
+      align-self: flex-start;
+      border: none;
+      background: none;
+      padding: 0;
+      color: var(--accent);
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 5px;
+    }
+
+    .empty { text-align: center; color: var(--muted); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 35px;
+      align-items: center;
+    }
+
+    .about-symbol {
+      border: 1px solid var(--line);
+      background: var(--paper);
+      min-height: 240px;
+      display: grid;
+      place-items: center;
+      font-size: 75px;
+      color: var(--accent);
+    }
+
+    .about-text h2 {
+      font-size: 34px;
+      font-weight: 500;
+      margin: 0 0 12px;
+    }
+
+    .about-text p { color: var(--muted); }
+
+    .contact {
+      text-align: center;
+      background: #eee6d9;
+      padding: 48px 20px;
+    }
+
+    .contact h2 {
+      font-size: 32px;
+      font-weight: 500;
+      margin: 0 0 12px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 28px 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(20, 20, 18, 0.65);
+    }
+
+    .modal.open { display: flex; }
+
+    .modal-box {
+      background: var(--paper);
+      width: min(650px, 100%);
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 30px;
+      border-radius: 5px;
+    }
+
+    .modal-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .modal-top h2 { font-weight: 500; }
+
+    .close-btn {
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: transparent;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .modal-content { white-space: pre-line; }
+
+    @media (max-width: 760px) {
+      .navbar { padding: 15px 0; flex-wrap: wrap; }
+      nav { gap: 12px; }
+      .hero { padding: 65px 0 55px; }
+      .writing-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-symbol { min-height: 150px; }
+      section { padding: 48px 0; }
+    }
+  </style>
 </head>
+
 <body>
-<header>
-  <p>ਪੰਜਾਬੀ ਅਲਫ਼ਾਜ਼ਾਂ ਦੀ ਦੁਨੀਆ</p>
-  <h1>Joban Era</h1>
-  <p>ਜਿੱਥੇ ਦਿਲ ਦੀ ਗੱਲ ਕਵਿਤਾ ਬਣਦੀ ਹੈ।</p>
-</header>
+  <header>
+    <div class="container navbar">
+      <a class="brand" href="#home">Joban <span>Era.</span></a>
 
-<nav>
-  <a href="#home">ਮੁੱਖ ਪੰਨਾ</a>
-  <a href="#poetry">ਕਵਿਤਾਵਾਂ</a>
-  <a href="#shayari">ਸ਼ਾਇਰੀ</a>
-  <a href="#about">ਮੇਰੇ ਬਾਰੇ</a>
-  <a href="#contact">ਸੰਪਰਕ</a>
-</nav>
+      <nav>
+        <a href="#home" data-pa="ਮੁੱਖ ਪੰਨਾ" data-en="Home">ਮੁੱਖ ਪੰਨਾ</a>
+        <a href="#writings" data-pa="ਲਿਖਤਾਂ" data-en="Writings">ਲਿਖਤਾਂ</a>
+        <a href="#about" data-pa="ਮੇਰੇ ਬਾਰੇ" data-en="About">ਮੇਰੇ ਬਾਰੇ</a>
+        <a href="#contact" data-pa="ਸੰਪਰਕ" data-en="Contact">ਸੰਪਰਕ</a>
+        <button class="lang-btn" id="langBtn" type="button">English</button>
+      </nav>
+    </div>
+  </header>
 
-<main id="home">
-  <h2>ਜੀ ਆਇਆਂ ਨੂੰ ❤️</h2>
-  <p>ਇਹ ਮੇਰੀਆਂ ਕਵਿਤਾਵਾਂ, ਮੇਰੇ ਅਹਿਸਾਸਾਂ
-  ਅਤੇ ਮੇਰੀ ਲਿਖਤਾਂ ਦੀ ਆਪਣੀ ਦੁਨੀਆ ਹੈ।</p>
+  <main>
+    <section class="hero container" id="home">
+      <div class="eyebrow" data-pa="ਇੱਕ ਲੇਖਕ ਦੀ ਆਪਣੀ ਦੁਨੀਆ" data-en="A writer's own world">
+        ਇੱਕ ਲੇਖਕ ਦੀ ਆਪਣੀ ਦੁਨੀਆ
+      </div>
 
-  <section id="poetry">
-    <h2>ਮੇਰੀਆਂ ਕਵਿਤਾਵਾਂ</h2>
-    <article>
-      <h3>ਮੇਰੇ ਅਹਿਸਾਸ</h3>
-      <p>ਕੁਝ ਗੱਲਾਂ ਸ਼ਬਦਾਂ ਵਿੱਚ ਨਹੀਂ ਆਉਂਦੀਆਂ,
-      ਕੁਝ ਖ਼ਾਮੋਸ਼ੀਆਂ ਕਵਿਤਾ ਬਣ ਜਾਂਦੀਆਂ।</p>
-      <p><em>— ਪ੍ਰੀਤ ਭੁੱਲਰ</em></p>
-    </article>
-  </section>
+      <h1 data-pa="ਜੋਬਨ ਦੀ ਕਲਮ" data-en="The World of Words">ਜੋਬਨ ਦੀ ਕਲਮ</h1>
 
-  <section id="shayari">
-    <h2>ਸ਼ਾਇਰੀ</h2>
-    <article>
-      <p>ਦਿਲ ਦੀਆਂ ਗੱਲਾਂ ਲਿਖਦਾ ਹਾਂ,
-      ਅਲਫ਼ਾਜ਼ਾਂ ਵਿੱਚ ਆਪਣੇ ਆਪ ਨੂੰ ਮਿਲਦਾ ਹਾਂ।</p>
-      <p><em>— ਪ੍ਰੀਤ</em></p>
-    </article>
-  </section>
+      <p data-pa="ਕੁਝ ਗੱਲਾਂ ਕਹੀਆਂ ਨਹੀਂ ਜਾਂਦੀਆਂ, ਸਿਰਫ਼ ਲਿਖੀਆਂ ਜਾਂਦੀਆਂ ਹਨ। ਮੇਰੇ ਸ਼ਬਦਾਂ ਦੀ ਦੁਨੀਆ ਵਿੱਚ ਤੁਹਾਡਾ ਸਵਾਗਤ ਹੈ।"
+         data-en="Some feelings are never spoken, only written. Welcome to my world of words.">
+        ਕੁਝ ਗੱਲਾਂ ਕਹੀਆਂ ਨਹੀਂ ਜਾਂਦੀਆਂ, ਸਿਰਫ਼ ਲਿਖੀਆਂ ਜਾਂਦੀਆਂ ਹਨ।
+        ਮੇਰੇ ਸ਼ਬਦਾਂ ਦੀ ਦੁਨੀਆ ਵਿੱਚ ਤੁਹਾਡਾ ਸਵਾਗਤ ਹੈ।
+      </p>
 
-  <section id="about">
-    <h2>ਲੇਖਕ ਬਾਰੇ</h2>
-    <p>ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ! ਮੈਂ ਜੋਬਨਪ੍ਰੀਤ ਸਿੰਘ ਭੁੱਲਰ ਹਾਂ।
-    ਪੰਜਾਬੀ ਕਵਿਤਾ ਅਤੇ ਸ਼ਾਇਰੀ ਮੇਰੇ ਦਿਲ ਦੇ ਨੇੜੇ ਹਨ।
-    Joban Era ਮੇਰੀ ਲਿਖਤਾਂ ਦੀ ਦੁਨੀਆ ਹੈ।</p>
-  </section>
+      <a class="main-btn" href="#writings"
+         data-pa="ਮੇਰੀਆਂ ਲਿਖਤਾਂ ਪੜ੍ਹੋ ↓"
+         data-en="Explore My Writings ↓">ਮੇਰੀਆਂ ਲਿਖਤਾਂ ਪੜ੍ਹੋ ↓</a>
+    </section>
 
-  <section id="contact">
-    <h2>ਸੰਪਰਕ</h2>
-    <p>ਮੇਰੀਆਂ ਲਿਖਤਾਂ ਪੜ੍ਹਨ ਲਈ ਧੰਨਵਾਦ!</p>
-    <p>ਸੰਪਰਕ ਲਈ ਆਪਣਾ ਈਮੇਲ ਪਤਾ ਇੱਥੇ ਜੋੜਿਆ ਜਾ ਸਕਦਾ ਹੈ।</p>
-  </section>
-</main>
+    <div class="container divider"></div>
 
-<footer>
-  © 2026 Joban Era · ਪ੍ਰੀਤ ਭੁੱਲਰ
-</footer>
+    <section class="container">
+      <div class="quote">
+        <div class="mark">“</div>
+        <p data-pa="ਕੁਝ ਅੱਖਰ ਕਾਗਜ਼ ਉੱਤੇ ਨਹੀਂ, ਰੂਹ ਦੇ ਅੰਦਰ ਲਿਖੇ ਜਾਂਦੇ ਨੇ।"
+           data-en="Some words are written not on paper, but deep within the soul.">
+          ਕੁਝ ਅੱਖਰ ਕਾਗਜ਼ ਉੱਤੇ ਨਹੀਂ, ਰੂਹ ਦੇ ਅੰਦਰ ਲਿਖੇ ਜਾਂਦੇ ਨੇ।
+        </p>
+        <small data-pa="— ਜੋਬਨ ਦੀ ਕਲਮ" data-en="— From Joban's pen">— ਜੋਬਨ ਦੀ ਕਲਮ</small>
+      </div>
+    </section>
+
+    <section class="container" id="writings">
+      <div class="section-heading">
+        <div class="eyebrow" data-pa="ਮੇਰੀਆਂ ਰਚਨਾਵਾਂ" data-en="My creations">ਮੇਰੀਆਂ ਰਚਨਾਵਾਂ</div>
+        <h2 data-pa="ਲਿਖਤਾਂ ਦੀ ਦੁਨੀਆ" data-en="A World of Writings">ਲਿਖਤਾਂ ਦੀ ਦੁਨੀਆ</h2>
+        <p data-pa="ਹਰ ਸ਼ਬਦ ਪਿੱਛੇ ਇੱਕ ਅਹਿਸਾਸ ਹੈ।" data-en="Every word carries a feeling.">
+          ਹਰ ਸ਼ਬਦ ਪਿੱਛੇ ਇੱਕ ਅਹਿਸਾਸ ਹੈ।
+        </p>
+      </div>
+
+      <div class="filters" id="filters">
+        <button class="filter-btn active" data-filter="all" data-pa="ਸਾਰੀਆਂ" data-en="All">ਸਾਰੀਆਂ</button>
+        <button class="filter-btn" data-filter="poetry" data-pa="ਕਵਿਤਾ" data-en="Poetry">ਕਵਿਤਾ</button>
+        <button class="filter-btn" data-filter="shayari" data-pa="ਸ਼ਾਇਰੀ" data-en="Shayari">ਸ਼ਾਇਰੀ</button>
+        <button class="filter-btn" data-filter="thoughts" data-pa="ਵਿਚਾਰ" data-en="Thoughts">ਵਿਚਾਰ</button>
+        <button class="filter-btn" data-filter="stories" data-pa="ਕਹਾਣੀਆਂ" data-en="Stories">ਕਹਾਣੀਆਂ</button>
+      </div>
+
+      <div class="writing-grid" id="writingGrid"></div>
+      <p class="empty" id="emptyMsg" hidden data-pa="ਇਸ ਸ਼੍ਰੇਣੀ ਵਿੱਚ ਹਾਲੇ ਕੋਈ ਲਿਖਤ ਨਹੀਂ।"
+         data-en="There are no writings in this category yet.">
+        ਇਸ ਸ਼੍ਰੇਣੀ ਵਿੱਚ ਹਾਲੇ ਕੋਈ ਲਿਖਤ ਨਹੀਂ।
+      </p>
+    </section>
+
+    <div class="container divider"></div>
+
+    <section class="container" id="about">
+      <div class="about-grid">
+        <div class="about-symbol">✍</div>
+        <div class="about-text">
+          <div class="eyebrow" data-pa="ਲੇਖਕ ਨਾਲ ਜਾਣ-ਪਛਾਣ" data-en="Meet the writer">
+            ਲੇਖਕ ਨਾਲ ਜਾਣ-ਪਛਾਣ
+          </div>
+          <h2 data-pa="ਮੈਂ ਜੋਬਨਪ੍ਰੀਤ ਸਿੰਘ ਭੁੱਲਰ ਹਾਂ।"
+              data-en="I am Jobanpreet Singh Bhullar.">
+            ਮੈਂ ਜੋਬਨਪ੍ਰੀਤ ਸਿੰਘ ਭੁੱਲਰ ਹਾਂ।
+          </h2>
+          <p data-pa="ਲਿਖਣਾ ਮੇਰੇ ਲਈ ਆਪਣੇ ਅਹਿਸਾਸਾਂ ਨੂੰ ਸ਼ਬਦ ਦੇਣ ਦਾ ਇੱਕ ਤਰੀਕਾ ਹੈ। Joban Era ਮੇਰੀਆਂ ਕਵਿਤਾਵਾਂ, ਸ਼ਾਇਰੀ ਅਤੇ ਵਿਚਾਰਾਂ ਲਈ ਇੱਕ ਛੋਟੀ ਜਿਹੀ ਦੁਨੀਆ ਹੈ।"
+             data-en="Writing is my way of giving words to feelings. Joban Era is a little world for my poetry, shayari and thoughts.">
+            ਲਿਖਣਾ ਮੇਰੇ ਲਈ ਆਪਣੇ ਅਹਿਸਾਸਾਂ ਨੂੰ ਸ਼ਬਦ ਦੇਣ ਦਾ ਇੱਕ ਤਰੀਕਾ ਹੈ।
+            Joban Era ਮੇਰੀਆਂ ਕਵਿਤਾਵਾਂ, ਸ਼ਾਇਰੀ ਅਤੇ ਵਿਚਾਰਾਂ ਲਈ ਇੱਕ ਛੋਟੀ ਜਿਹੀ ਦੁਨੀਆ ਹੈ।
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="container">
+        <div class="eyebrow" data-pa="ਆਓ ਜੁੜੀਏ" data-en="Let's connect">ਆਓ ਜੁੜੀਏ</div>
+        <h2 data-pa="ਸ਼ਬਦਾਂ ਨਾਲ ਜੁੜੇ ਰਹੋ।" data-en="Stay connected through words.">
+          ਸ਼ਬਦਾਂ ਨਾਲ ਜੁੜੇ ਰਹੋ।
+        </h2>
+        <p data-pa="ਮੇਰੀਆਂ ਨਵੀਆਂ ਲਿਖਤਾਂ ਪੜ੍ਹਦੇ ਰਹੋ ਅਤੇ ਇਸ ਸਾਹਿਤਕ ਸਫ਼ਰ ਦਾ ਹਿੱਸਾ ਬਣੋ।"
+           data-en="Read my writings and be a part of this literary journey.">
+          ਮੇਰੀਆਂ ਨਵੀਆਂ ਲਿਖਤਾਂ ਪੜ੍ਹਦੇ ਰਹੋ ਅਤੇ ਇਸ ਸਾਹਿਤਕ ਸਫ਼ਰ ਦਾ ਹਿੱਸਾ ਬਣੋ।
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div>© <span id="year"></span> Joban Era</div>
+    <div data-pa="ਸ਼ਬਦਾਂ ਵਿੱਚ ਵੱਸਦੀ ਇੱਕ ਦੁਨੀਆ • ਜੋਬਨ ਦੀ ਕਲਮ"
+         data-en="A world within words • From Joban's pen">
+      ਸ਼ਬਦਾਂ ਵਿੱਚ ਵੱਸਦੀ ਇੱਕ ਦੁਨੀਆ • ਜੋਬਨ ਦੀ ਕਲਮ
+    </div>
+  </footer>
+
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-box">
+      <div class="modal-top">
+        <h2 id="modalTitle"></h2>
+        <button class="close-btn" id="closeModal" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-content" id="modalContent"></div>
+    </div>
+  </div>
+
+  <script>
+    const writings = [
+      {
+        id: 1,
+        category: "poetry",
+        title: "ਮੇਰੇ ਸ਼ਬਦ",
+        enTitle: "My Words",
+        excerpt: "ਜੋ ਦਿਲ ਵਿੱਚ ਵੱਸਦਾ ਹੈ, ਉਹੀ ਕਲਮ ਰਾਹੀਂ ਬਾਹਰ ਆਉਂਦਾ ਹੈ।",
+        enExcerpt: "What lives in the heart finds its way through the pen.",
+        body: "ਜੋ ਦਿਲ ਵਿੱਚ ਵੱਸਦਾ ਹੈ,\nਉਹੀ ਕਲਮ ਰਾਹੀਂ ਬਾਹਰ ਆਉਂਦਾ ਹੈ।\nਕੁਝ ਅਹਿਸਾਸ ਸ਼ਬਦ ਬਣ ਜਾਂਦੇ ਨੇ,\nਕੁਝ ਚੁੱਪ ਵਿੱਚ ਰਹਿ ਜਾਂਦੇ ਨੇ।",
+        enBody: "What lives in the heart\nfinds its way through the pen.\nSome feelings become words,\nwhile others remain in silence."
+      },
+      {
+        id: 2,
+        category: "shayari",
+        title: "ਅਧੂਰੇ ਅਹਿਸਾਸ",
+        enTitle: "Unfinished Feelings",
+        excerpt: "ਹਰ ਗੱਲ ਦਾ ਮੁਕੰਮਲ ਹੋਣਾ ਜ਼ਰੂਰੀ ਨਹੀਂ, ਕੁਝ ਅਹਿਸਾਸ ਅਧੂਰੇ ਵੀ ਸੋਹਣੇ ਹੁੰਦੇ ਨੇ।",
+        enExcerpt: "Not everything needs an ending; some feelings are beautiful unfinished.",
+        body: "ਹਰ ਗੱਲ ਦਾ ਮੁਕੰਮਲ ਹੋਣਾ ਜ਼ਰੂਰੀ ਨਹੀਂ,\nਕੁਝ ਅਹਿਸਾਸ ਅਧੂਰੇ ਵੀ ਸੋਹਣੇ ਹੁੰਦੇ ਨੇ।",
+        enBody: "Not every story needs to be complete.\nSome feelings are beautiful even unfinished."
+      },
+      {
+        id: 3,
+        category: "thoughts",
+        title: "ਜ਼ਿੰਦਗੀ ਦੇ ਪੰਨੇ",
+        enTitle: "Pages of Life",
+        excerpt: "ਜ਼ਿੰਦਗੀ ਸਿਰਫ਼ ਲੰਘਾਉਣੀ ਨਹੀਂ, ਇਸ ਨੂੰ ਸਮਝਣਾ ਵੀ ਇੱਕ ਕਲਾ ਹੈ।",
+        enExcerpt: "Life is not just to be spent; understanding it is an art.",
+        body: "ਜ਼ਿੰਦਗੀ ਸਿਰਫ਼ ਲੰਘਾਉਣੀ ਨਹੀਂ,\nਇਸ ਨੂੰ ਸਮਝਣਾ ਵੀ ਇੱਕ ਕਲਾ ਹੈ।\nਹਰ ਦਿਨ ਇੱਕ ਨਵਾਂ ਪੰਨਾ ਹੈ,\nਹਰ ਤਜਰਬਾ ਇੱਕ ਨਵਾਂ ਸਬਕ ਹੈ।",
+        enBody: "Life is not merely to be spent;\nunderstanding it is an art.\nEach day is a new page,\neach experience a lesson."
+      },
+      {
+        id: 4,
+        category: "stories",
+        title: "ਇੱਕ ਨਵੀਂ ਸ਼ੁਰੂਆਤ",
+        enTitle: "A New Beginning",
+        excerpt: "ਹਰ ਸਫ਼ਰ ਦੀ ਸ਼ੁਰੂਆਤ ਇੱਕ ਛੋਟੇ ਜਿਹੇ ਕਦਮ ਨਾਲ ਹੁੰਦੀ ਹੈ।",
+        enExcerpt: "Every journey begins with one small step.",
+        body: "ਹਰ ਸਫ਼ਰ ਦੀ ਸ਼ੁਰੂਆਤ ਇੱਕ ਛੋਟੇ ਜਿਹੇ ਕਦਮ ਨਾਲ ਹੁੰਦੀ ਹੈ। ਕਈ ਵਾਰ ਸਾਨੂੰ ਸਿਰਫ਼ ਪਹਿਲਾ ਕਦਮ ਚੁੱਕਣ ਦੀ ਲੋੜ ਹੁੰਦੀ ਹੈ।",
+        enBody: "Every journey begins with one small step. Sometimes all we need is the courage to take that first step."
+      },
+      {
+        id: 5,
+        category: "poetry",
+        title: "ਰੂਹ ਦੀ ਆਵਾਜ਼",
+        enTitle: "Voice of the Soul",
+        excerpt: "ਕਲਮ ਉਦੋਂ ਬੋਲਦੀ ਹੈ, ਜਦੋਂ ਦਿਲ ਕੋਲ ਕਹਿਣ ਲਈ ਬਹੁਤ ਕੁਝ ਹੋਵੇ।",
+        enExcerpt: "The pen speaks when the heart has too much to say.",
+        body: "ਕਲਮ ਉਦੋਂ ਬੋਲਦੀ ਹੈ,\nਜਦੋਂ ਦਿਲ ਕੋਲ ਕਹਿਣ ਲਈ ਬਹੁਤ ਕੁਝ ਹੋਵੇ।",
+        enBody: "The pen begins to speak\nwhen the heart has too much to say."
+      },
+      {
+        id: 6,
+        category: "shayari",
+        title: "ਖ਼ਾਮੋਸ਼ੀ",
+        enTitle: "Silence",
+        excerpt: "ਖ਼ਾਮੋਸ਼ੀ ਵੀ ਕਈ ਵਾਰ ਹਜ਼ਾਰਾਂ ਸ਼ਬਦਾਂ ਦੀ ਕਹਾਣੀ ਸੁਣਾ ਜਾਂਦੀ ਹੈ।",
+        enExcerpt: "Sometimes silence tells a story of a thousand words.",
+        body: "ਖ਼ਾਮੋਸ਼ੀ ਨੂੰ ਵੀ ਸੁਣਿਆ ਕਰ,\nਹਰ ਗੱਲ ਜ਼ੁਬਾਨ ਨਹੀਂ ਕਹਿੰਦੀ।",
+        enBody: "Learn to listen to silence;\nnot every truth is spoken aloud."
+      }
+    ];
+
+    let language = "pa";
+    let activeFilter = "all";
+
+    const grid = document.getElementById("writingGrid");
+    const emptyMsg = document.getElementById("emptyMsg");
+    const langBtn = document.getElementById("langBtn");
+    const modal = document.getElementById("modal");
+
+    const categoryNames = {
+      pa: {
+        poetry: "ਕਵਿਤਾ",
+        shayari: "ਸ਼ਾਇਰੀ",
+        thoughts: "ਵਿਚਾਰ",
+        stories: "ਕਹਾਣੀਆਂ"
+      },
+      en: {
+        poetry: "Poetry",
+        shayari: "Shayari",
+        thoughts: "Thoughts",
+        stories: "Stories"
+      }
+    };
+
+    function renderWritings() {
+      const list = writings.filter(item =>
+        activeFilter === "all" || item.category === activeFilter
+      );
+
+      grid.innerHTML = "";
+
+      list.forEach(item => {
+        const card = document.createElement("article");
+        card.className = "writing-card";
+
+        const category = document.createElement("div");
+        category.className = "category";
+        category.textContent = categoryNames[language][item.category];
+
+        const title = document.createElement("h3");
+        title.textContent = language === "pa" ? item.title : item.enTitle;
+
+        const excerpt = document.createElement("p");
+        excerpt.textContent = language === "pa" ? item.excerpt : item.enExcerpt;
+
+        const button = document.createElement("button");
+        button.className = "read-btn";
+        button.type = "button";
+        button.textContent = language === "pa" ? "ਪੂਰੀ ਲਿਖਤ ਪੜ੍ਹੋ ↗" : "Read full writing ↗";
+        button.addEventListener("click", () => openWriting(item.id));
+
+        card.append(category, title, excerpt, button);
+        grid.appendChild(card);
+      });
+
+      emptyMsg.hidden = list.length !== 0;
+    }
+
+    function openWriting(id) {
+      const item = writings.find(entry => entry.id === id);
+      if (!item) return;
+
+      document.getElementById("modalTitle").textContent =
+        language === "pa" ? item.title : item.enTitle;
+
+      document.getElementById("modalContent").textContent =
+        language === "pa" ? item.body : item.enBody;
+
+      modal.classList.add("open");
+      document.getElementById("closeModal").focus();
+    }
+
+    function closeWriting() {
+      modal.classList.remove("open");
+    }
+
+    document.getElementById("closeModal").addEventListener("click", closeWriting);
+
+    modal.addEventListener("click", event => {
+      if (event.target === modal) closeWriting();
+    });
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") closeWriting();
+    });
+
+    document.getElementById("filters").addEventListener("click", event => {
+      const button = event.target.closest("[data-filter]");
+      if (!button) return;
+
+      activeFilter = button.dataset.filter;
+
+      document.querySelectorAll(".filter-btn").forEach(btn => {
+        btn.classList.toggle("active", btn === button);
+      });
+
+      renderWritings();
+    });
+
+    langBtn.addEventListener("click", () => {
+      language = language === "pa" ? "en" : "pa";
+      document.documentElement.lang = language;
+
+      document.querySelectorAll("[data-pa][data-en]").forEach(element => {
+        element.textContent = element.dataset[language];
+      });
+
+      langBtn.textContent = language === "pa" ? "English" : "ਪੰਜਾਬੀ";
+
+      renderWritings();
+
+      if (modal.classList.contains("open")) {
+        closeWriting();
+      }
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    renderWritings();
+  </script>
 </body>
 </html>
+
